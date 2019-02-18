@@ -802,7 +802,10 @@ endif
 KBUILD_CFLAGS += $(call cc-disable-warning, unused-but-set-variable)
 
 ifeq ($(ld-name),lld)
+LDFLAGS += --lto-O3 -z norelro
+else
 LDFLAGS += -O3 -z norelro
+KBUILD_LDFLAGS += $(LDFLAGS)
 endif
 
 KBUILD_CFLAGS += $(call cc-disable-warning, unused-const-variable)
