@@ -1,4 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0
+
+ccflags-y += -mllvm -inline-threshold=15000
+ccflags-y += -mllvm -inlinehint-threshold=10000
+
 ifeq ($(cc-name),clang)
 ccflags-y += -Wno-error=unneeded-internal-declaration
 endif
