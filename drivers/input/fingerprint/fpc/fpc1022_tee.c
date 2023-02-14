@@ -529,10 +529,7 @@ static int __always_inline fpc_fb_notifier_callback(struct notifier_block *self,
 	unsigned int blank;
 	int retval = 0;
 
-	if (!fpc1022)
-		return 0;
-
-	if (event != FB_EVENT_BLANK)
+	if (!fpc1022 || event != FB_EVENT_BLANK)
 		return 0;
 
 	printk("[info] %s value = %d\n", __func__, (int)event);
