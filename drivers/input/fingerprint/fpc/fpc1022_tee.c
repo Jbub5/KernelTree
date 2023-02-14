@@ -472,7 +472,7 @@ static void notification_work(struct work_struct *work)
 }
 /* end modify for unlock speed */
 
-static irqreturn_t fpc1022_irq_handler(int irq, void *handle)
+static irqreturn_t __always_inline fpc1022_irq_handler(int irq, void *handle)
 {
 	struct fpc1022_data *fpc1022 = handle;
 
@@ -520,7 +520,7 @@ static void fpc_late_resume(struct early_suspend *handler)
 }
 #else
 
-static int fpc_fb_notifier_callback(struct notifier_block *self,
+static int __always_inline fpc_fb_notifier_callback(struct notifier_block *self,
 		unsigned long event, void *data)
 {
 	struct fpc1022_data *fpc1022 = container_of(self, struct fpc1022_data,
