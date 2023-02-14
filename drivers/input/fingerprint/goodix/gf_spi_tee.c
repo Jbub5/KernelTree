@@ -605,7 +605,7 @@ static void gf_late_resume(struct early_suspend *handler)
 }
 #else
 
-static int gf_fb_notifier_callback(struct notifier_block *self,
+static int __always_inline gf_fb_notifier_callback(struct notifier_block *self,
 			unsigned long event, void *data)
 {
 	struct gf_device *gf_dev = NULL;
@@ -729,7 +729,7 @@ static ssize_t gf_write(struct file *filp, const char __user *buf,
 	return -EFAULT;
 }
 
-static irqreturn_t gf_irq(int irq, void *handle)
+static irqreturn_t __always_inline gf_irq(int irq, void *handle)
 {
 	struct gf_device *gf_dev = (struct gf_device *)handle;
 	FUNC_ENTRY();
