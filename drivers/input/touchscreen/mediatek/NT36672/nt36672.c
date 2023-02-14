@@ -288,7 +288,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed. -5---access fail.
 *******************************************************/
-int32_t nvt_set_page(uint32_t addr)
+inline int32_t nvt_set_page(uint32_t addr)
 {
 	uint8_t buf[4] = {0};
 
@@ -446,7 +446,7 @@ Description:
 return:
 	n.a.
 *******************************************************/
-void nvt_sw_reset_idle(void)
+inline void nvt_sw_reset_idle(void)
 {
 	//---MCU idle cmds to SWRST_N8_ADDR---
 	nvt_write_addr(SWRST_N8_ADDR, 0xAA);
@@ -461,7 +461,7 @@ Description:
 return:
 	n.a.
 *******************************************************/
-void nvt_bootloader_reset(void)
+inline void nvt_bootloader_reset(void)
 {
 	//---reset cmds to SWRST_N8_ADDR---
 	nvt_write_addr(SWRST_N8_ADDR, 0x69);
@@ -481,7 +481,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed. -1---fail.
 *******************************************************/
-int32_t nvt_clear_fw_status(void)
+inline int32_t nvt_clear_fw_status(void)
 {
 	uint8_t buf[8] = {0};
 	int32_t i = 0;
@@ -522,7 +522,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed. -1---failed.
 *******************************************************/
-int32_t nvt_check_fw_status(void)
+inline int32_t nvt_check_fw_status(void)
 {
 	uint8_t buf[8] = {0};
 	int32_t i = 0;
@@ -558,7 +558,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed. -1---failed.
 *******************************************************/
-int32_t nvt_check_fw_reset_state(RST_COMPLETE_STATE check_reset_state)
+inline int32_t nvt_check_fw_reset_state(RST_COMPLETE_STATE check_reset_state)
 {
 	uint8_t buf[8] = {0};
 	int32_t ret = 0;
@@ -601,7 +601,7 @@ Description:
 return:
 	Executive outcomes. 0---success. -1---fail.
 *******************************************************/
-int32_t nvt_read_pid(void)
+inline int32_t nvt_read_pid(void)
 {
 	uint8_t buf[4] = {0};
 	int32_t ret = 0;
@@ -633,7 +633,7 @@ Description:
 return:
 	Executive outcomes. 0---success. -1---fail.
 *******************************************************/
-int32_t nvt_get_fw_info(void)
+inline int32_t nvt_get_fw_info(void)
 {
 	uint8_t buf[64] = {0};
 	uint32_t retry_count = 0;
@@ -965,7 +965,7 @@ Description:
 return:
 	n.a.
 *******************************************************/
-void nvt_ts_wakeup_gesture_report(uint8_t gesture_id, uint8_t *data)
+inline void nvt_ts_wakeup_gesture_report(uint8_t gesture_id, uint8_t *data)
 {
 	uint32_t keycode = 0;
 	uint8_t func_type = data[2];
@@ -1055,7 +1055,7 @@ return:
 	n.a.
 *******************************************************/
 #ifdef CONFIG_OF
-static int32_t nvt_parse_dt(struct device *dev)
+static inline int32_t nvt_parse_dt(struct device *dev)
 {
 	struct device_node *np = dev->of_node;
 	int32_t ret = 0;
@@ -1087,7 +1087,7 @@ static int32_t nvt_parse_dt(struct device *dev)
 	return ret;
 }
 #else
-static int32_t nvt_parse_dt(struct device *dev)
+static inline int32_t nvt_parse_dt(struct device *dev)
 {
 #if NVT_TOUCH_SUPPORT_HW_RST
 	ts->reset_gpio = NVTTOUCH_RST_PIN;
@@ -1104,7 +1104,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed. not 0---failed.
 *******************************************************/
-static int nvt_gpio_config(struct nvt_ts_data *ts)
+static inline int nvt_gpio_config(struct nvt_ts_data *ts)
 {
 	int32_t ret = 0;
 
@@ -1145,7 +1145,7 @@ Description:
 return:
 	n.a.
 *******************************************************/
-static void nvt_gpio_deconfig(struct nvt_ts_data *ts)
+static inline void nvt_gpio_deconfig(struct nvt_ts_data *ts)
 {
 	if (gpio_is_valid(ts->irq_gpio))
 		gpio_free(ts->irq_gpio);
@@ -1155,7 +1155,7 @@ static void nvt_gpio_deconfig(struct nvt_ts_data *ts)
 #endif
 }
 
-static uint8_t nvt_fw_recovery(uint8_t *point_data)
+static inline uint8_t nvt_fw_recovery(uint8_t *point_data)
 {
 	uint8_t i = 0;
 	uint8_t detected = true;
@@ -1302,7 +1302,7 @@ Description:
 return:
 	n.a.
 *******************************************************/
-static irqreturn_t nvt_ts_work_func(int irq, void *data)
+static inline irqreturn_t nvt_ts_work_func(int irq, void *data)
 {
 	int32_t ret = -1;
 	uint8_t point_data[POINT_DATA_LEN + 1 + DUMMY_BYTES] = {0};
@@ -1500,7 +1500,7 @@ Description:
 return:
 	Executive outcomes. 0---NVT IC. -1---not NVT IC.
 *******************************************************/
-static int8_t nvt_ts_check_chip_ver_trim(void)
+static inline int8_t nvt_ts_check_chip_ver_trim(void)
 {
 	uint8_t buf[8] = {0};
 	int32_t retry = 0;
@@ -1569,13 +1569,13 @@ bool	nvt_gesture_flag;
 #if WAKEUP_GESTURE
 
 #ifdef CONFIG_TOUCHSCREEN_COMMON
-static ssize_t double_tap_show(struct kobject *kobj,
+static inline ssize_t double_tap_show(struct kobject *kobj,
                                struct kobj_attribute *attr, char *buf)
 {
     return sprintf(buf, "%d\n", nvt_gesture_flag);
 }
 
-static ssize_t double_tap_store(struct kobject *kobj,
+static inline ssize_t double_tap_store(struct kobject *kobj,
                                 struct kobj_attribute *attr, const char *buf,
                                 size_t count)
 {
@@ -1595,7 +1595,7 @@ static struct tp_common_ops double_tap_ops = {
 };
 #endif
 
-int nvt_gesture_switch(struct input_dev *dev, unsigned int type, unsigned int code, int value)
+inline int nvt_gesture_switch(struct input_dev *dev, unsigned int type, unsigned int code, int value)
 {
 	if (type == EV_SYN && code == SYN_CONFIG) {
 		if (value == WAKEUP_OFF) {
@@ -1618,7 +1618,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed. negative---failed
 *******************************************************/
-static int32_t nvt_ts_probe(struct spi_device *client)
+static inline int32_t nvt_ts_probe(struct spi_device *client)
 {
 	int32_t ret = 0;
 #if ((TOUCH_KEY_NUM > 0) || WAKEUP_GESTURE)
@@ -2010,7 +2010,7 @@ Description:
 return:
 	Executive outcomes. 0---succeed.
 *******************************************************/
-static int32_t nvt_ts_remove(struct spi_device *client)
+static inline int32_t nvt_ts_remove(struct spi_device *client)
 {
 	NVT_LOG("Removing driver...\n");
 	if (ts->event_wq) {
@@ -2088,7 +2088,7 @@ static int32_t nvt_ts_remove(struct spi_device *client)
 	return 0;
 }
 
-static void nvt_ts_shutdown(struct spi_device *client)
+static inline void nvt_ts_shutdown(struct spi_device *client)
 {
 	NVT_LOG("Shutdown driver...\n");
 
@@ -2292,7 +2292,7 @@ static int32_t __always_inline nvt_ts_resume(struct device *dev)
 
 	return 0;
 }
-static void nvt_resume_work(struct work_struct *work)
+static inline void nvt_resume_work(struct work_struct *work)
 {
 	struct nvt_ts_data *ts =
 			container_of(work, struct nvt_ts_data, resume_work);
@@ -2445,7 +2445,7 @@ Description:
 return:
 	Executive Outcomes. 0---succeed. not 0---failed.
 ********************************************************/
-static int32_t __init nvt_driver_init(void)
+static inline int32_t __init nvt_driver_init(void)
 {
 	int32_t ret = 0;
 
@@ -2474,7 +2474,7 @@ Description:
 return:
 	n.a.
 ********************************************************/
-static void __exit nvt_driver_exit(void)
+static inline void __exit nvt_driver_exit(void)
 {
 	spi_unregister_driver(&nvt_spi_driver);
 }
