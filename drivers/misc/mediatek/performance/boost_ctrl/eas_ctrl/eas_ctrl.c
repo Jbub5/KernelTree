@@ -300,8 +300,9 @@ int update_eas_boost_value(int kicker, int cgroup_idx, int value)
 	char msg[LOG_BUF_SIZE];
 	char msg1[LOG_BUF_SIZE];
 
-	if (cgroup_idx >= NR_CGROUP || cgroup_idx < 0) {
-		pr_debug("cgroup_idx:%d, error\n", cgroup_idx);
+	if (cgroup_idx >= NR_CGROUP) {
+		mutex_unlock(&boost_eas);
+		pr_debug(" cgroup_idx >= NR_CGROUP, error\n");
 		perfmgr_trace_printk("cpu_ctrl", "cgroup_idx >= NR_CGROUP\n");
 		return -1;
 	}
@@ -390,8 +391,9 @@ int update_eas_uclamp_min(int kicker, int cgroup_idx, int value)
 	char msg[LOG_BUF_SIZE];
 	char msg1[LOG_BUF_SIZE];
 
-	if (cgroup_idx >= NR_CGROUP || cgroup_idx < 0) {
-		pr_debug(" cgroup_idx:%d, error\n", cgroup_idx);
+	if (cgroup_idx >= NR_CGROUP) {
+		mutex_unlock(&boost_eas);
+		pr_debug(" cgroup_idx >= NR_CGROUP, error\n");
 		perfmgr_trace_printk("uclamp_min", "cgroup_idx >= NR_CGROUP\n");
 		return -1;
 	}
