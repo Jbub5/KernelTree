@@ -12,7 +12,7 @@
 #include <asm/assembler.h>
 
 	.text
-	.arch		armv8-a+crypto
+	.arch		armv8-a+crypto+sha2
 
 	dga		.req	q20
 	dgav		.req	v20
