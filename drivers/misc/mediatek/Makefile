@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 #$(call all-subdir-src-or-makefile)
 export MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
