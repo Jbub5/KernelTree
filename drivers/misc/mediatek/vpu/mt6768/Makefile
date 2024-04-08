@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 ccflags-y += -I$(srctree)/drivers/staging/android/ion
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/include/mt-plat/$(MTK_PLATFORM)/include

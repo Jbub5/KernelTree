@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 obj-$(CONFIG_MACH_MT6853) += ptp3_v1/
 obj-$(CONFIG_MACH_MT6893) += ptp3_v1/

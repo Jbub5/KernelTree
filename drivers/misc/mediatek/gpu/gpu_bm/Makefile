@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # See http://www.gnu.org/licenses/gpl-2.0.html for more details.
 #
+ldflags-y := -flto
 
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/dramc/$(MTK_PLATFORM)/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/sspm/v2/

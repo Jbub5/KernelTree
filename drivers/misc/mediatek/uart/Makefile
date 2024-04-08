@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 #ccflags-y += -DCONFIG_MTK_FPGA
 #ccflags-y += -DFIX_TO_26M

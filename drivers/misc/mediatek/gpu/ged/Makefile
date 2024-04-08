@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 GED_TOP = $(srctree)/drivers/misc/mediatek/gpu/ged
 MTK_TOP = $(srctree)/drivers/misc/mediatek/

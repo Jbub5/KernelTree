@@ -9,6 +9,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 subdir-ccflags-y += -I$(srctree)/drivers/misc/mediatek/performance/perf_ioctl/ \
 		    -I$(srctree)/drivers/misc/mediatek/performance/include/ \

@@ -1,6 +1,7 @@
 #
 # Makefile for misc devices that really don't fit anywhere else.
 #
+ldflags-y := -flto
 
 obj-y += ft8719_fhdp_dsi_vdo_huaxing_j19.o
 

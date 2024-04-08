@@ -10,6 +10,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
+
 ifdef CONFIG_LEDS_MTK_DISP
 obj-$(CONFIG_LEDS_MTK_DISP)		+= leds-mtk-disp.o
 else ifdef CONFIG_LEDS_MTK_PWM

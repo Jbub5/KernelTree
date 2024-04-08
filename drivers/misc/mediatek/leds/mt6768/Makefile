@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 obj-$(CONFIG_MTK_LEDS) += mtk_leds.o
 obj-$(CONFIG_KTD3136_SUPPORT) += ktd3136_bl.o
