@@ -412,14 +412,20 @@ PERL		= perl
 PYTHON		= python
 CHECK		= sparse
 
+ifeq ($(cc-name),clang)
+ANTIDEBUG := -g0 -ggdb0 -fno-ident -fno-dwarf2-cfi-asm -gno-modules -gno-embed-source -gno-simple-template-names -gno-record-command-line -gno-record-gcc-switches -gno-column-info -gno-gnu-pubnames -gno-pubnames -feliminate-unused-debug-types -feliminate-unused-debug-symbols -fno-debug-types-section -fno-var-tracking -mllvm -polly-run-dce -fno-use-cxa-atexit
+else
+ANTIDEBUG := -g0 -ggdb0 -feliminate-unused-debug-types -feliminate-unused-debug-symbols
+endif
+
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 NOSTDINC_FLAGS  =
-CFLAGS_MODULE   =
-AFLAGS_MODULE   =
+CFLAGS_MODULE   = $(ANTIDEBUG)
+AFLAGS_MODULE   = $(ANTIDEBUG)
 LDFLAGS_MODULE  = --strip-debug -flto
-CFLAGS_KERNEL	=
-AFLAGS_KERNEL	=
+CFLAGS_KERNEL	= $(ANTIDEBUG)
+AFLAGS_KERNEL	= $(ANTIDEBUG)
 LDFLAGS_vmlinux = --strip-debug
 
 # Use USERINCLUDE when you must reference the UAPI directories only.
@@ -447,10 +453,10 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Wno-format-security \
 		   -std=gnu89
 KBUILD_CPPFLAGS := -D__KERNEL__
-KBUILD_AFLAGS_KERNEL :=
-KBUILD_CFLAGS_KERNEL :=
-KBUILD_AFLAGS_MODULE  := -DMODULE
-KBUILD_CFLAGS_MODULE  := -DMODULE
+KBUILD_AFLAGS_KERNEL := $(ANTIDEBUG)
+KBUILD_CFLAGS_KERNEL := $(ANTIDEBUG)
+KBUILD_AFLAGS_MODULE  := $(ANTIDEBUG) -DMODULE
+KBUILD_CFLAGS_MODULE  := $(ANTIDEBUG) -DMODULE
 KBUILD_LDFLAGS_MODULE := -T $(srctree)/scripts/module-common.lds
 LDFLAGS := --strip-debug
 GCC_PLUGINS_CFLAGS :=
@@ -849,20 +855,20 @@ endif
 
 KBUILD_CFLAGS   += $(call cc-option, -fno-var-tracking-assignments)
 
-ifdef CONFIG_DEBUG_INFO
-ifdef CONFIG_DEBUG_INFO_SPLIT
-KBUILD_CFLAGS   += $(call cc-option, -gsplit-dwarf, -g)
-else
-KBUILD_CFLAGS	+= -g
-endif
-ifneq ($(LLVM_IAS),1)
-KBUILD_AFLAGS	+= -Wa,-gdwarf-2
-endif
-endif
+#ifdef CONFIG_DEBUG_INFO
+#ifdef CONFIG_DEBUG_INFO_SPLIT
+#KBUILD_CFLAGS   += $(call cc-option, -gsplit-dwarf, -g)
+#else
+#KBUILD_CFLAGS	+= -g
+#endif
+#ifneq ($(LLVM_IAS),1)
+#KBUILD_AFLAGS	+= -Wa,-gdwarf-2
+#endif
+#endif
 
-ifdef CONFIG_DEBUG_INFO_DWARF4
-KBUILD_CFLAGS	+= $(call cc-option, -gdwarf-4,)
-endif
+#ifdef CONFIG_DEBUG_INFO_DWARF4
+#KBUILD_CFLAGS	+= $(call cc-option, -gdwarf-4,)
+#endif
 
 ifdef CONFIG_DEBUG_INFO_REDUCED
 KBUILD_CFLAGS 	+= $(call cc-option, -femit-struct-debug-baseonly) \
