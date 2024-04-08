@@ -10,6 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
+ldflags-y := -flto
 
 MTK_GPU_VERSION = $(subst ",,$(CONFIG_MTK_GPU_VERSION))
 $(info *MTK_GPU_VERSION 3 = $(word 3,$(MTK_GPU_VERSION)))

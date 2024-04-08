@@ -14,6 +14,7 @@
 #
 # Makefile for misc devices that really don't fit anywhere else.
 #
+ldflags-y := -flto
 
 obj-$(CONFIG_MTK_LCM) += mt65xx_lcm_list.o        \
                          lcm_common.o             \
