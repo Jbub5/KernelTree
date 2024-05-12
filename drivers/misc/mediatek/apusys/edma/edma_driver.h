@@ -17,7 +17,7 @@
 
 #include "apusys_device.h"
 
-#define DEBUG
+//#define DEBUG
 
 #if 0
 #define edma_debug(mask, ...) do { if (edma_klog & mask) \
