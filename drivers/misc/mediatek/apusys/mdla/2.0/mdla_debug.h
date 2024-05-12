@@ -14,7 +14,7 @@
 #ifndef __MDLA_DEBUG_H__
 #define __MDLA_DEBUG_H__
 
-#define DEBUG 1
+//#define DEBUG 1
 
 #include "mdla.h"
 #include <linux/types.h>

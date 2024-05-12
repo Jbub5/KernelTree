@@ -47,7 +47,7 @@
 /*----------------------------------------------------------------------------*/
 /* #define I2C_DRIVERID_LIS3DH 345 */
 /*----------------------------------------------------------------------------*/
-#define DEBUG 1
+//#define DEBUG 1
 #define CONFIG_LIS3DH_LOWPASS   /*apply low pass filter on output*/
 
 #define LIS3DH_AXIS_X			0

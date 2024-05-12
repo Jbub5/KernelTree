@@ -31,7 +31,7 @@
 ********************************************************************************
 */
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 #define CONNSYS_DUMP_INFO_SIZE		180
 #define CONNSYS_ASSERT_INFO_SIZE	164

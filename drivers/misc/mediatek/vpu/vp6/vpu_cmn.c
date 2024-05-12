@@ -1624,7 +1624,7 @@ int vpu_init_device(struct vpu_device *vpu_device)
 	mutex_init(&vpu_device->vpu_load_image_lock);
 
 	vpu_device->vpu_num_users = 0;
-	vpu_device->vpu_log_level = 1;
+	vpu_device->vpu_log_level = 0;
 
 	vpu_device->in_sec_world = false;
 

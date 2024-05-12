@@ -16,8 +16,8 @@
 #include "ged_log.h"
 #include "ged_sysfs.h"
 
-#define DEBUG_ON	1
-#define DEBUG_OFF	0
+#define DEBUG_ON	0
+#define DEBUG_OFF	1
 
 const char *global_packagename = "-1";
 static struct mutex gsGPUTunerLock;

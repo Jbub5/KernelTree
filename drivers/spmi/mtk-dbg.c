@@ -4,7 +4,7 @@
  * Copyright (C) 2021 XiaoMi, Inc.
  * Author: Argus Lin <argus.lin@mediatek.com>
  */
-#define DEBUG
+//#define DEBUG
 
 #include <linux/clk.h>
 #include <linux/interrupt.h>

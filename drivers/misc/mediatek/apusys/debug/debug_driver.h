@@ -17,7 +17,7 @@
 
 #include "apusys_device.h"
 
-#define DEBUG
+//#define DEBUG
 #define DEBUG_PREFIX "[apusys_dbg]"
 
 #define DBG_LOG_ERR(x, args...) \
