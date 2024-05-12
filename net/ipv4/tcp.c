@@ -2953,6 +2953,7 @@ void tcp_get_info(struct sock *sk, struct tcp_info *info)
 	info->tcpi_pmtu = icsk->icsk_pmtu_cookie;
 	info->tcpi_rcv_ssthresh = tp->rcv_ssthresh;
 	info->tcpi_rtt = tp->srtt_us >> 3;
+	info->tcpi_seq_rtt = tp->seq_rtt_us >> 3;
 	info->tcpi_rttvar = tp->mdev_us >> 2;
 	info->tcpi_snd_ssthresh = tp->snd_ssthresh;
 	info->tcpi_advmss = tp->advmss;
@@ -3582,7 +3583,7 @@ void __init tcp_init(void)
 	max_rshare = min(6UL*1024*1024, limit);
 
 	sysctl_tcp_wmem[0] = SK_MEM_QUANTUM;
-	sysctl_tcp_wmem[1] = 16*1024;
+	sysctl_tcp_wmem[1] = 20*1024;
 	sysctl_tcp_wmem[2] = max(64*1024, max_wshare);
 
 	sysctl_tcp_rmem[0] = SK_MEM_QUANTUM;
