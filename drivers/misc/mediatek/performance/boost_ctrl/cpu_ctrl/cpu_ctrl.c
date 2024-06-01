@@ -32,7 +32,7 @@
 #include "cpu_ctrl_cfp.h"
 #endif
 
-#ifdef CONFIG_TRACING
+#ifdef DEBUG
 #include <linux/kallsyms.h>
 #include <linux/trace_events.h>
 #endif
@@ -79,7 +79,7 @@ static void update_isolation_cpu_locked(int kicker, int enable, int cpu)
 			final = 1;
 	}
 
-#ifdef CONFIG_TRACING
+#ifdef DEBUG
 	perfmgr_trace_count(enable, "cpu_ctrl_isolation_%d_%d", kicker, cpu);
 #endif
 
@@ -114,7 +114,9 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 			, sizeof(struct ppm_limit_data), GFP_KERNEL);
 	if (!final_freq) {
 		retval = -1;
+#ifdef DEBUG
 		perfmgr_trace_printk("cpu_ctrl", "!final_freq\n");
+#endif
 		goto ret_update;
 	}
 	if (num_cluster != perfmgr_clusters) {
@@ -122,8 +124,10 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 				"num_cluster : %d perfmgr_clusters: %d, doesn't match\n",
 				num_cluster, perfmgr_clusters);
 		retval = -1;
+#ifdef DEBUG
 		perfmgr_trace_printk("cpu_ctrl",
 			"num_cluster != perfmgr_clusters\n");
+#endif
 		goto ret_update;
 	}
 
@@ -141,7 +145,9 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 	len += snprintf(msg + len, sizeof(msg) - len, "[%d] ", kicker);
 	if (len < 0) {
 		retval = -EIO;
+#ifdef DEBUG
 		perfmgr_trace_printk("cpu_ctrl", "return -EIO 1\n");
+#endif
 		goto ret_update;
 	}
 	for_each_perfmgr_clusters(i) {
@@ -154,7 +160,9 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 		freq_set[kicker][i].min, freq_set[kicker][i].max);
 		if (len < 0) {
 			retval = -EIO;
+#ifdef DEBUG
 			perfmgr_trace_printk("cpu_ctrl", "return -EIO 2\n");
+#endif
 			goto ret_update;
 		}
 
@@ -168,7 +176,9 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 				"[0x %lx] ", policy_mask[i]);
 		if (len1 < 0) {
 			retval = -EIO;
+#ifdef DEBUG
 			perfmgr_trace_printk("cpu_ctrl", "return -EIO 3\n");
+#endif
 			goto ret_update;
 		}
 	}
@@ -200,7 +210,9 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 				current_freq[i].min, current_freq[i].max);
 		if (len < 0) {
 			retval = -EIO;
+#ifdef DEBUG
 			perfmgr_trace_printk("cpu_ctrl", "return -EIO 4\n");
+#endif
 			goto ret_update;
 		}
 	}
@@ -211,7 +223,7 @@ int update_userlimit_cpu_freq(int kicker, int num_cluster
 	if (log_enable)
 		pr_debug("%s", msg);
 
-#ifdef CONFIG_TRACING
+#ifdef DEBUG
 	perfmgr_trace_printk("cpu_ctrl", msg);
 #endif
 
