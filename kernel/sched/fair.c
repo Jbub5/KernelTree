@@ -9060,7 +9060,7 @@ static void yield_task_fair(struct rq *rq)
 	 * so we don't do microscopic update in schedule()
 	 * and double the fastpath cost.
 	 */
-	rq_clock_skip_update(rq);
+	rq_clock_skip_update(rq, true);
 #else
 	if (curr->policy != SCHED_BATCH) {
 		update_rq_clock(rq);
