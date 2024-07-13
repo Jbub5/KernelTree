@@ -470,10 +470,10 @@ void platform_device_del(struct platform_device *pdev)
 EXPORT_SYMBOL_GPL(platform_device_del);
 #ifdef CONFIG_MTPROF
 #include "bootprof.h"
-#else
-#define TIME_LOG_START()
-#define TIME_LOG_END()
-#define bootprof_pdev_register(ts, pdev)
+//#else
+//#define TIME_LOG_START()
+//#define TIME_LOG_END()
+//#define bootprof_pdev_register(ts, pdev)
 #endif
 
 /**
@@ -486,13 +486,13 @@ int platform_device_register(struct platform_device *pdev)
 #ifdef CONFIG_MTPROF
 	unsigned long long ts = 0;
 #endif
-	TIME_LOG_START();
+	//TIME_LOG_START();
 
 	device_initialize(&pdev->dev);
 	arch_setup_pdev_archdata(pdev);
 	ret = platform_device_add(pdev);
-	TIME_LOG_END();
-	bootprof_pdev_register(ts, pdev);
+	//TIME_LOG_END();
+	//bootprof_pdev_register(ts, pdev);
 	return ret;
 }
 EXPORT_SYMBOL_GPL(platform_device_register);
