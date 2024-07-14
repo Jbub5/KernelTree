@@ -17,7 +17,7 @@
 #include "bpf_helpers.h"
 
 #define DEFAULT_PKTGEN_UDP_PORT 9
-#define DEBUG 0
+//#define DEBUG 0
 
 static int tcp(void *data, uint64_t tp_off, void *data_end)
 {

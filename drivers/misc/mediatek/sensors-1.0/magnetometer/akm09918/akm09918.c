@@ -29,7 +29,7 @@
 #include "akm09918.h"
 #include "mag.h"
 
-#define DEBUG 0
+//#define DEBUG 0
 #define AKM09918_DEV_NAME	"akm09918"
 #define DRIVER_VERSION	 "1.0.1"
 #define AKM09918_RETRY_COUNT	10

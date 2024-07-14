@@ -21,7 +21,7 @@
 #include "cust_gyro.h"
 #include "gyroscope.h"
 
-#define DEBUG 0
+//#define DEBUG 0
 /*----------------------------------------------------------------------------*/
 #define INV_GYRO_AUTO_CALI 1
 #define ITG1010_DEFAULT_FS ITG1010_FS_1000

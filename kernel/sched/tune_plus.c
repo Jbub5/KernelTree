@@ -11,7 +11,7 @@
  * See http://www.gnu.org/licenses/gpl-2.0.html for more details.
  */
 
-#define MET_STUNE_DEBUG 1
+//#define MET_STUNE_DEBUG 1
 
 #if MET_STUNE_DEBUG
 #include <mt-plat/met_drv.h>

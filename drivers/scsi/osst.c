@@ -57,7 +57,7 @@ static const char * osst_version = "0.99.4";
 
 /* The driver prints some debugging information on the console if DEBUG
    is defined and non-zero. */
-#define DEBUG 0
+//#define DEBUG 0
 
 /* The message level for the debug messages is currently set to KERN_NOTICE
    so that people can easily see the messages. Later when the debugging messages

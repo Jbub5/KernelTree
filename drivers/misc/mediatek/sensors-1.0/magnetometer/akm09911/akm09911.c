@@ -31,7 +31,7 @@
 #include "cust_mag.h"
 #include "mag.h"
 
-#define DEBUG 0
+//#define DEBUG 0
 #define AKM09911_DEV_NAME "akm09911"
 #define DRIVER_VERSION "1.0.1"
 #define AKM09911_DEBUG 1
