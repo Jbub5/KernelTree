@@ -478,7 +478,7 @@ static irqreturn_t fpc1022_irq_handler(int irq, void *handle)
 
 	/* Make sure 'wakeup_enabled' is updated before using it
 	 ** since this is interrupt context (other thread...) */
-	printk("fpc1022_irq_handler");
+	//printk("fpc1022_irq_handler");
 	smp_rmb();
 
 	/* if (fpc1022->wakeup_enabled) { */
@@ -486,8 +486,8 @@ static irqreturn_t fpc1022_irq_handler(int irq, void *handle)
 	/* } */
 
 	/* begin modify for unlock speed */
-	printk("%s fastScreenOn wait_finger_down = %d, fb_black = %d \n", __func__,
-			fpc1022->wait_finger_down, fpc1022->fb_black);
+	//printk("%s fastScreenOn wait_finger_down = %d, fb_black = %d \n", __func__,
+			//fpc1022->wait_finger_down, fpc1022->fb_black);
 	if (fpc1022->wait_finger_down && fpc1022->fb_black) {
 			fpc1022->wait_finger_down = false;
 			schedule_work(&fpc1022->work);

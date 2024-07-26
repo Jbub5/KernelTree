@@ -358,8 +358,8 @@ static int wk_bat_temp_dbg(int bat_temp_prev, int bat_temp)
 	unsigned short i;
 
 	vbif28 = auxadc_priv_read_channel(pmic_auxadc_dev, AUXADC_VBIF);
-	pr_notice("BAT_TEMP_PREV:%d,BAT_TEMP:%d,VBIF28:%d\n",
-		bat_temp_prev, bat_temp, vbif28);
+	//pr_notice("BAT_TEMP_PREV:%d,BAT_TEMP:%d,VBIF28:%d\n",
+		//bat_temp_prev, bat_temp, vbif28);
 	if (bat_temp < 200 || abs(bat_temp_prev - bat_temp) > 100) {
 		wk_auxadc_dbg_dump();
 		for (i = 0; i < 5; i++) {
@@ -368,9 +368,9 @@ static int wk_bat_temp_dbg(int bat_temp_prev, int bat_temp)
 							 AUXADC_BAT_TEMP);
 		}
 		bat_temp_new = bat_temp_filter(arr_bat_temp, 5);
-		pr_notice("%d,%d,%d,%d,%d, BAT_TEMP_NEW:%d\n",
-			arr_bat_temp[0], arr_bat_temp[1], arr_bat_temp[2],
-			arr_bat_temp[3], arr_bat_temp[4], bat_temp_new);
+		//pr_notice("%d,%d,%d,%d,%d, BAT_TEMP_NEW:%d\n",
+			//arr_bat_temp[0], arr_bat_temp[1], arr_bat_temp[2],
+			//arr_bat_temp[3], arr_bat_temp[4], bat_temp_new);
 	}
 	return bat_temp_new;
 }
