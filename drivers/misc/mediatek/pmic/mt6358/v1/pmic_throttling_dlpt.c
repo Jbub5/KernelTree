@@ -1112,9 +1112,6 @@ int dlpt_notify_handler(void *unused)
 			exec_dlpt_callback(g_imix_val);
 			pre_ui_soc = cur_ui_soc;
 
-			pr_info("[DLPT_final] %d,%d,%d,%d,%d\n",
-				g_imix_val, pre_ui_soc, cur_ui_soc,
-				diff_ui_soc, IMAX_MAX_VALUE);
 		}
 
 		dlpt_notify_flag = false;

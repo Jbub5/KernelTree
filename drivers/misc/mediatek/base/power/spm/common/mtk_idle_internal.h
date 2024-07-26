@@ -42,8 +42,8 @@
  * mtk idle log flag
  *******************************************************************/
 #define MTK_IDLE_LOG_REDUCE         (1 << 0)
-#define MTK_IDLE_LOG_RESOURCE_USAGE (1 << 1)
-#define MTK_IDLE_LOG_DISABLE        (1 << 2)
+#define MTK_IDLE_LOG_RESOURCE_USAGE (1 << 0)
+#define MTK_IDLE_LOG_DISABLE        (1 << 1)
 #define MTK_IDLE_LOG_DUMP_LP_GS     (1 << 4)
 
 

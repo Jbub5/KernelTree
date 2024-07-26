@@ -589,7 +589,7 @@ void mcdi_heart_beat_log_dump(void)
 
 	if ((mcdi_heart_beat_log_curr - mcdi_heart_beat_log_prev)
 			> mcdi_heart_beat_log_dump_thd) {
-		dump_log = true;
+		//dump_log = true;
 		mcdi_heart_beat_log_prev = mcdi_heart_beat_log_curr;
 	}
 
@@ -643,7 +643,7 @@ void mcdi_heart_beat_log_dump(void)
 	mcdi_buf_append(buf, ", system_idle_hint = %08x",
 						system_idle_hint_result_raw());
 
-	printk_deferred("[mcdi]%s\n", get_mcdi_buf(buf));
+	//printk_deferred("[mcdi]%s\n", get_mcdi_buf(buf));
 }
 
 int wfi_enter(int cpu)

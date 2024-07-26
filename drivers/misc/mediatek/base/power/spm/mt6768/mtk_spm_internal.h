@@ -191,8 +191,6 @@ void __spm_set_pwrctrl_pcm_flags(struct pwr_ctrl *pwrctrl, u32 flags);
 void __spm_set_pwrctrl_pcm_flags1(struct pwr_ctrl *pwrctrl, u32 flags);
 void __spm_sync_pcm_flags(struct pwr_ctrl *pwrctrl);
 void __spm_get_wakeup_status(struct wake_status *wakesta);
-unsigned int __spm_output_wake_reason(
-	const struct wake_status *wakesta, bool suspend, const char *scenario);
 unsigned int __spm_get_wake_period(int pwake_time, unsigned int last_wr);
 
 /***********************************************************

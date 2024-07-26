@@ -314,7 +314,7 @@ void mtk_idle_post_process_by_chip(
  * mtk idle output log
  *******************************************************************/
 #define IDLE_TIMER_OUT_CRITERIA (32)    /* 1 ms (32k/sec)*/
-#define IDLE_PRINT_LOG_DURATION (5000)  /* 5 seconds */
+#define IDLE_PRINT_LOG_DURATION (60000)  /* 60 seconds */
 
 static bool check_print_log_duration(void)
 {
@@ -335,33 +335,7 @@ static unsigned int mtk_idle_output_log(
 	int idle_type, const struct wake_status *wakesta,
 	unsigned int op_cond, unsigned int idle_flag)
 {
-	bool print_log = false;
-	unsigned int wr = WR_NONE;
+	return WR_NONE;
 
-	/* No log for latency profiling case */
-	if (idle_flag & MTK_IDLE_LOG_DISABLE)
-		return WR_NONE;
-
-	if (!(idle_flag & MTK_IDLE_LOG_REDUCE)) {
-		print_log = true;
-	} else {
-		if (wakesta->assert_pc != 0 || wakesta->r12 == 0)
-			print_log = true;
-		else if (wakesta->timer_out <= IDLE_TIMER_OUT_CRITERIA)
-			print_log = true;
-		else if (check_print_log_duration())
-			print_log = true;
-	}
-
-	if (print_log) {
-		pr_debug("[name:spm&]Power/swap op_cond = 0x%x\n"
-			, op_cond);
-		wr = __spm_output_wake_reason(
-			wakesta, false, mtk_idle_name(idle_type));
-		if (idle_flag & MTK_IDLE_LOG_RESOURCE_USAGE)
-			spm_resource_req_dump();
-	}
-
-	return wr;
 }
 

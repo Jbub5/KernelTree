@@ -233,7 +233,7 @@ static void spm_suspend_pcm_setup_after_wfi(unsigned int ex_flag
 		spm_suspend_post_process(SPM_RESUME, pwrctrl);
 }
 
-static unsigned int spm_output_wake_reason(unsigned int ex_flag
+/* static unsigned int spm_output_wake_reason(unsigned int ex_flag
 		, struct wake_status *wakesta)
 {
 	unsigned int wr;
@@ -322,7 +322,7 @@ static unsigned int spm_output_wake_reason(unsigned int ex_flag
 	}
 
 	return wr;
-}
+} */
 
 /*
  * wakesrc: WAKE_SRC_XXX
@@ -488,7 +488,7 @@ RESTORE_IRQ:
 	spm_suspend_pcm_setup_after_wfi(ex_flag, cpu, pwrctrl);
 
 	/* record last wakesta */
-	last_wr = spm_output_wake_reason(ex_flag, &spm_wakesta);
+	//last_wr = spm_output_wake_reason(ex_flag, &spm_wakesta);
 	mtk_spm_irq_restore();
 
 	lockdep_off();
