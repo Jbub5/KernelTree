@@ -66,8 +66,6 @@ void spm_output_sleep_option(void);
 /* record last wakesta */
 u32 spm_get_last_wakeup_src(void);
 u32 spm_get_last_wakeup_misc(void);
-void spm_set_sysclk_settle(void);
-void spm_dump_world_clk_cntcv(void);
 
 
 void spm_suspend_pre_process(int cmd, struct pwr_ctrl *pwrctrl);
