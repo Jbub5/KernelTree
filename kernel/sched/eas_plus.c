@@ -651,7 +651,7 @@ hmp_fastest_idle_prefer_pull(int this_cpu, struct task_struct **p,
 
 			target_capacity = capacity_orig_of(cpu);
 			if (se && entity_is_task(se) &&
-			     (uclamp_task_effective_util(task_of(se),
+			     (uclamp_eff_value(task_of(se),
 				UCLAMP_MIN) >= target_capacity) &&
 			     cpumask_test_cpu(this_cpu,
 					      &((task_of(se))->cpus_allowed))) {
@@ -807,19 +807,30 @@ static __always_inline
 unsigned long uclamp_rq_util_with(struct rq *rq, unsigned long util,
 					struct task_struct *p)
 {
-	unsigned long min_util = rq->uclamp.value[UCLAMP_MIN];
-	unsigned long max_util = rq->uclamp.value[UCLAMP_MAX];
+	unsigned long min_util = 0;
+	unsigned long max_util = 0;
+
+	if (!static_branch_likely(&sched_uclamp_used))
+		return util;
 
 	if (p) {
-		min_util = max_t(unsigned long, min_util,
-		  (unsigned long)uclamp_task_effective_util(p, UCLAMP_MIN));
-		max_util = max_t(unsigned long, max_util,
-		  (unsigned long)uclamp_task_effective_util(p, UCLAMP_MAX));
+		min_util = uclamp_eff_value(p, UCLAMP_MIN);
+		max_util = uclamp_eff_value(p, UCLAMP_MAX);
+
+		/*
+		 * Ignore last runnable task's max clamp, as this task will
+		 * reset it. Similarly, no need to read the rq's min clamp.
+		 */
+		if (rq->uclamp_flags & UCLAMP_FLAG_IDLE)
+			goto out;
 	}
 
+	min_util = max_t(unsigned long, min_util, READ_ONCE(rq->uclamp[UCLAMP_MIN].value));
+	max_util = max_t(unsigned long, max_util, READ_ONCE(rq->uclamp[UCLAMP_MAX].value));
+	out:
 	/*
 	 * Since CPU's {min,max}_util clamps are MAX aggregated considering
-	 * RUNNABLE tasks with_different_ clamps, we can end up with an
+	 * RUNNABLE tasks with _different_ clamps, we can end up with an
 	 * inversion. Fix it now when the clamps are applied.
 	 */
 	if (unlikely(min_util >= max_util))
@@ -1091,7 +1102,7 @@ static int find_energy_efficient_cpu_enhanced(struct task_struct *p,
 		return -1;
 
 	prefer_idle = schedtune_prefer_idle(p);
-	boosted = (schedtune_task_boost(p) > 0) || (uclamp_task_effective_util(p, UCLAMP_MIN) > 0);
+	boosted = (schedtune_task_boost(p) > 0) || (uclamp_eff_value(p, UCLAMP_MIN) > 0);
 	target_cap = boosted ? 0 : ULONG_MAX;
 
 	sg = sd->groups;
