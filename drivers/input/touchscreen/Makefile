@@ -4,6 +4,8 @@
 #
 
 # Each configuration option enables a list of files.
+ccflags-y += -mllvm -inline-threshold=15000
+ccflags-y += -mllvm -inlinehint-threshold=10000
 
 wm97xx-ts-y := wm97xx-core.o
 
